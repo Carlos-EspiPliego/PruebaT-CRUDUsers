@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 
 import { UsersApp } from './UsersApp.tsx'
 import { store } from '@store'
-import './index.css'
+import './index.scss'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -7,8 +7,13 @@ export default defineConfig({
   resolve: {
     alias: {
       '@store': '/src/redux',
+      '@components': '/src/components',
       '@router': '/src/router',
-      '@hooks': '/src/hooks'
+      '@hooks': '/src/hooks',
+      '@pages': '/src/pages',
+      '@layouts': '/src/ui/layouts',
+      '@ui': '/src/ui',
+      '@images': '/src/assets/images',
     }
   }
 })

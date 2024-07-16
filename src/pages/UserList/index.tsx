@@ -1,6 +1,11 @@
+import { MainLayout } from "@layouts/MainLayout";
+
+import { UserListTable } from "@components";
 
 export const UserList = () => {
   return (
-    <div>Index</div>
+    <MainLayout titleText={"Lista de Usuarios"}>
+      <UserListTable />
+    </MainLayout>
   )
 }
