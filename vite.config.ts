@@ -14,6 +14,8 @@ export default defineConfig({
       '@layouts': '/src/ui/layouts',
       '@ui': '/src/ui',
       '@images': '/src/assets/images',
+      '@api': '/src/api',
+      '@utils': '/src/utils'
     }
   }
 })
