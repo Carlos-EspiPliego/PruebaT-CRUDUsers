@@ -2,11 +2,12 @@ import { IconEdit, IconEye, IconPlus, IconTrash } from '@tabler/icons-react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import './index.scss'
-import { AppDispatch, RootState } from '../../redux'
+import { AppDispatch, RootState, setActiveUser } from '../../redux'
 import { getInitialsName, getStatusClasses } from '@utils/userTableUtils'
 import { useRedirect } from '@hooks/useRedirect'
 import { deleteUserById } from '@store/slices/thunks'
 import { useAlert } from '../../hooks/useAlert'
+import { User } from '../../api/types'
 
 export const tableHeaders = [
     'ID',
@@ -25,6 +26,11 @@ export const UserListTable = () => {
     const handleDeleteUser = (id: number) => {
         console.log('Delete user with id:', id)
         dispatch(deleteUserById({ id, showAlert }))
+    }
+
+    const handleViewUser = (user: User) => {
+        dispatch(setActiveUser(user))
+        redirectTo(`/ver-usuario/${user.id}`)
     }
 
     return (
@@ -112,6 +118,7 @@ export const UserListTable = () => {
                                                 </span>
                                                 <span
                                                     className='transform transition-transform duration-300 hover:scale-110 cursor-pointer'
+                                                    onClick={() => handleViewUser(user)}
                                                 >
                                                     <IconEye stroke={1} />
                                                 </span>
