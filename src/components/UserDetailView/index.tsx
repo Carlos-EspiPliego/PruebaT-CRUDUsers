@@ -5,8 +5,6 @@ import { getInitialsName, getStatusClasses } from '../../utils/userTableUtils';
 export const UserDetailView = () => {
     const { activeUser } = useSelector((state: RootState) => state.users);
 
-    console.log('Active User:', activeUser);
-
     return (
         <div className='flex flex-col gap-4 justify-center h-full text-text-body'>
             {activeUser ? (
