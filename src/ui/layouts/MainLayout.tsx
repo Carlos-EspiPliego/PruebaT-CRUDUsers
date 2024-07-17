@@ -1,7 +1,8 @@
 import React from 'react';
 import { MainLayoutProps } from './types';
 
-import { Header, Footer } from '@ui';
+import { Header } from '@ui/Header';
+import { Footer } from '@ui/Footer';
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ children, titleText, breadcumbComponent }) => {
     return (

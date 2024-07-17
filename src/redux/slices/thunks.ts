@@ -1,9 +1,10 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { User, CreateUserDTO, UpdateUserDTO } from '@api/types';
-import { getUsers, createUser, updateUser, deleteUser } from '@api/userApi';
 import axios from 'axios';
-import { AlertOptions } from '../../hooks/useAlert';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { FormikHelpers } from 'formik';
+
+import { User, CreateUserDTO } from '@api/types';
+import { getUsers, createUser, deleteUser } from '@api/userApi';
+import { AlertOptions } from '@hooks/useAlert';
 
 interface AddUserParams {
     user: CreateUserDTO;
@@ -16,7 +17,7 @@ export const fetchUsers = createAsyncThunk<User[], void, { rejectValue: string }
     'users/fetch',
     async () => {
         console.log("fetchUsers");
-        const response = await getUsers(1);
+        const response = await getUsers();
         return response;
     }
 )

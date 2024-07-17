@@ -6,6 +6,7 @@ export enum Gender {
 }
 
 export enum Status {
+    Default = '',
     Active = 'active',
     Inactive = 'inactive'
 }

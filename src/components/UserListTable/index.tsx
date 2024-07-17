@@ -2,12 +2,13 @@ import { IconEdit, IconEye, IconPlus, IconTrash } from '@tabler/icons-react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import './index.scss'
-import { AppDispatch, RootState, setActiveUser } from '../../redux'
+import { AppDispatch, RootState } from '@store/store'
+import { setActiveUser } from '@store/slices/userSlice'
 import { getInitialsName, getStatusClasses } from '@utils/userTableUtils'
 import { useRedirect } from '@hooks/useRedirect'
 import { deleteUserById } from '@store/slices/thunks'
-import { useAlert } from '../../hooks/useAlert'
-import { User } from '../../api/types'
+import { useAlert } from '@hooks/useAlert'
+import { User } from '@api/types'
 
 export const tableHeaders = [
     'ID',

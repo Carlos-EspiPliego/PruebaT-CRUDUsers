@@ -1,12 +1,12 @@
-import { useFormikForm } from "@hooks/forms/useFormikForm"
-import { CreateUserDTO, Gender } from '../../api/types';
-import { useDataForms } from "@hooks/forms/useDataForms";
 import { useDispatch } from "react-redux";
-import { addUser } from "../../redux/slices/thunks";
-import { AppDispatch } from "../../redux";
-import { redirect } from "react-router-dom";
-import { useRedirect } from "../../hooks/useRedirect";
-import { useAlert } from "../../hooks/useAlert";
+
+import { CreateUserDTO, Gender } from '@api/types';
+import { useDataForms } from "@hooks/forms/useDataForms";
+import { addUser } from "@store/slices/thunks";
+import { AppDispatch } from "@store/store";
+import { useAlert } from "@hooks/useAlert";
+import { useRedirect } from "@hooks/useRedirect";
+import { useFormikForm } from "@hooks/forms/useFormikForm"
 
 
 export const CreateNewUserForm = () => {
@@ -18,19 +18,6 @@ export const CreateNewUserForm = () => {
     const onSubmit = (values: CreateUserDTO) => {
         console.log(values)
         dispatch(addUser({ user: values, showAlert, formik, redirectTo }))
-
-        // showAlert({
-        //     title: 'Usuario registrado',
-        //     text: 'El usuario se ha creado correctamente',
-        //     icon: 'success',
-        //     confirmButtonText: 'OK',
-        //     showCancelButton: false,
-        //     cancelButtonText: '',
-        //     callback: () => {
-        //         console.log('Confirmed!');
-        //         redirectTo('/')
-        //     },
-        // });
     }
 
     const formik = useFormikForm<CreateUserDTO>({

@@ -1,10 +1,10 @@
 import { MainLayout } from "@layouts/MainLayout";
 
-import { UserListTable } from "@components";
-import { useDispatch, useSelector } from "react-redux";
+import { UserListTable } from "@components/UserListTable";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchUsers } from "@store/slices/thunks";
-import { AppDispatch } from "../../redux";
+import { AppDispatch } from "@store/store";
 
 export const UserList = () => {
   const dispatch: AppDispatch = useDispatch();

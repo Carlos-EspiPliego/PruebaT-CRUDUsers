@@ -1,4 +1,4 @@
-import { User } from "../api/types";
+import { User } from "@api/types";
 
 export interface UserState {
     users: User[];

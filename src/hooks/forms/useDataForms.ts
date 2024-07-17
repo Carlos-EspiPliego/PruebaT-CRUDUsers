@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { CreateUserDTO, Gender, Status } from '../../api/types';
+import { CreateUserDTO, Gender, Status } from '@api/types';
 
 export const useDataForms = () => {
 
@@ -17,6 +17,7 @@ export const useDataForms = () => {
         email: Yup.string().required('El email es requerido')
             .email('El email no es válido'),
         gender: Yup.string().required('El género es requerido'),
+        status: Yup.string().required('El estado es requerido')
     };
 
     return {

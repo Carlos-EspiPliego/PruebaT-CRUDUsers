@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { UserState } from '../types';
-import { User } from '../../api/types';
+import { User } from '@api/types';
 import { fetchUsers, addUser, deleteUserById } from './thunks';
 
 const initialState: UserState = {

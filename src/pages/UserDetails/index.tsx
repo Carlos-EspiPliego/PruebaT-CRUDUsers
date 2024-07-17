@@ -1,6 +1,6 @@
-import { Link, useParams } from 'react-router-dom';
-import { MainLayout } from '@ui';
-import { UserDetailView } from '@components';
+import { Link } from 'react-router-dom';
+import { MainLayout } from '@ui/layouts/MainLayout';
+import { UserDetailView } from '@components/UserDetailView';
 
 const BreadcumComponent = () => (
     <div className="flex gap-2">
@@ -11,11 +11,10 @@ const BreadcumComponent = () => (
 );
 
 export const UserDetails = () => {
-    const { id } = useParams<{ id: string }>();
 
     return (
         <MainLayout titleText={"Detalle de usuario"} breadcumbComponent={<BreadcumComponent />}>
-            <UserDetailView idUser={id} />
+            <UserDetailView />
         </MainLayout>
     )
 }

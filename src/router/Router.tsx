@@ -1,5 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { UserList, CreateNewUser, UserDetails } from '@pages'
+import { UserList } from '@pages/UserList'
+import { CreateNewUser } from '@pages/CreateNewUser'
+import { UserDetails } from '@pages/UserDetails'
 
 export const Router = () => {
     return (

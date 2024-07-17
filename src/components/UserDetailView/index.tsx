@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux';
+import { RootState } from '@store/store';
 import { getInitialsName, getStatusClasses } from '../../utils/userTableUtils';
 
 export const UserDetailView = () => {

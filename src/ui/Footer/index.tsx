@@ -1,5 +1,3 @@
-
-
 export const Footer = () => {
     return (
         <footer className="border-t border-line h-16 flex justify-center items-center">
