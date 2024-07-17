@@ -34,14 +34,15 @@ CRUD Users es una aplicación web responsiva desarrollada con Vite y TypeScript 
 ### Propuesta de Diseño:
 
 La propuesta de diseño fue realizada en Figma, y se puede visualizar en el siguiente enlace: [Propuesta de Diseño](https://www.figma.com/design/qRh2mBH8wmvgm6dFLOykr3/PRUEBA-TECNICA?m=auto&t=WxLp3kwQVHzPlDYy-1)
+
 El proyecto en Figma consta de 3 páginas: Colors, UI Elements & Components y Applications prototypes como se muestra en la siguiente imagen:
-![Estructura del Proyecto en Figma](./assets/screen-shots/estructura-proyecto-figma.png)
+![Estructura del Proyecto en Figma](./src/assets/screen-shots/estructura-proyecto-figma.png)
 
 ### Maquetación:
 
-![Listado de Usuarios](./assets/screen-shots/home-desk.png)
-![Agregar Usuarios](./assets/screen-shots/create-user-desk.png)
-![Editar Usuarios](./assets/screen-shots/edit-user-desk.png)
+![Listado de Usuarios](./src/assets/screen-shots/home-desk.png)
+![Agregar Usuarios](./src/assets/screen-shots/create-user-desk.png)
+![Editar Usuarios](./src/assets/screen-shots/edit-user-desk.png)
 
 ## Flujo de Trabajo
 
@@ -55,7 +56,8 @@ El flujo de trabajo consistió en desarrollar características en ramas de funci
 
 ## Autor
 
-- GitHub - [@GalaxyPliego](https://github.com/carlos-espipliego)
+- GitHub - [@Carlos-EspiPliego](https://github.com/carlos-espipliego)
+- GitHub Anterior - [@CarlosEspiPliego](https://github.com/carlosespipliego)
 - Portfolio Web - [Portfolio](https://carlos-espipliego.github.io/portfolio-web/)
 - LinkedIn - [Carlos Espipliego](https://www.linkedin.com/in/CarlosEspiPliego/)
 - Frontend Mentor - [@GalaxyPliego](https://www.frontendmentor.io/profile/carlosespipliego)
