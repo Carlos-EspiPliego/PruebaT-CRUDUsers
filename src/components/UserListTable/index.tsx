@@ -25,9 +25,7 @@ export const UserListTable = () => {
     const showAlert = useAlert();
 
     const handleDeleteUser = (id: number | null | '') => {
-        console.log('Delete user with id:', id)
         if (typeof id === 'number') {
-            console.log('Delete user with id:', id);
             dispatch(deleteUserById({ id, showAlert }));
         }
     }

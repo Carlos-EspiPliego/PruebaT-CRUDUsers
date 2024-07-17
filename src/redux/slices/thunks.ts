@@ -8,7 +8,6 @@ import { AddUserParams, DeleteUserParams, UpdateUserParams } from './types';
 export const fetchUsers = createAsyncThunk<User[], void, { rejectValue: string }>(
     'users/fetch',
     async () => {
-        console.log("fetchUsers");
         const response = await getUsers();
         return response;
     }
@@ -19,7 +18,6 @@ export const addUser = createAsyncThunk<User, AddUserParams, { rejectValue: stri
     async ({ user, showAlert, formik, redirectTo }, { rejectWithValue }) => {
         try {
             const response: User = await createUser(user);
-            console.log("addUser Response: ", response);
             if (response) {
                 showAlert({
                     title: 'Usuario registrado',
@@ -85,7 +83,6 @@ export const updateUser = createAsyncThunk<User, UpdateUserParams, { rejectValue
     async ({ user, showAlert, formik, redirectTo }, { rejectWithValue }) => {
         try {
             const response: User = await createUser(user);
-            console.log("updateUser Response: ", response);
             if (response) {
                 showAlert({
                     title: 'Usuario actualizado',
