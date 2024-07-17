@@ -24,7 +24,6 @@ export const userSlice = createSlice({
             state.error = action.payload;
         },
         setActiveUser(state, action: PayloadAction<User>) {
-            console.log('Active User:', action.payload)
             state.activeUser = action.payload;
         },
         resetActiveUser(state) {
@@ -57,7 +56,6 @@ export const userSlice = createSlice({
             }),
             builder.addCase(addUser.rejected, (state, action) => {
                 state.loading = false;
-                console.log("Error Action Payload: ", action.payload)
                 state.error = action.payload;
             });
 

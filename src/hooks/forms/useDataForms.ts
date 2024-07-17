@@ -24,8 +24,6 @@ export const useDataForms = () => {
         }
     }
 
-    // console.log('Initial Values: ', initialValues)
-
     const validationSchema = {
         name: Yup.string().required('El nombre es requerido')
             .min(3, 'El nombre debe tener al menos 3 caracteres')

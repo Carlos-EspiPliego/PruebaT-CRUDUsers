@@ -17,7 +17,6 @@ export const CreateNewUserForm = () => {
     const showAlert = useAlert();
 
     const onSubmit = (values: User) => {
-        console.log(values)
         dispatch(addUser({ user: values, showAlert, formik, redirectTo }))
     }
 

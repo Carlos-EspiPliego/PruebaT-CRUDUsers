@@ -1,30 +1,61 @@
-# React + TypeScript + Vite
+# CRUD User - Prueba Técnica
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tabla de contenidos
 
-Currently, two official plugins are available:
+- [Enlaces](#enlaces)
+- [Mi proceso](#mi-proceso)
+  - [Construido con](#construido-con)
+  - [Propuesta de Diseño](#rpropuesta-diseño)
+- [Flujo de Tabajo](#flujo-de-trabajo)
+- [Autor](#autor)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+CRUD Users es una aplicación web responsiva desarrollada con Vite y TypeScript que permite la gestión de usuarios a través de una interfaz intuitiva. La aplicación incluye funcionalidades para crear, leer, actualizar y eliminar usuarios, utilizando una API RESTful para manejar los datos.
 
-## Expanding the ESLint configuration
+## Enlace del Sitio en Vivo
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Demo: [CRUD Users](https://carlos-espipliego.github.io/PruebaT-CRUDUsers/)
 
-- Configure the top-level `parserOptions` property like this:
+## Mi proceso
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### Tecnologías utilizadas:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- React
+- Vite
+- Typescript
+- Redux Toolkit
+- Tailwind CSS
+- React-Router-Dom v6
+- Sass
+- Axios
+- Formik & Yup
+- SweetAlert2
+- Tabler Icons
+
+### Propuesta de Diseño:
+
+La propuesta de diseño fue realizada en Figma, y se puede visualizar en el siguiente enlace: [Propuesta de Diseño](https://www.figma.com/design/qRh2mBH8wmvgm6dFLOykr3/PRUEBA-TECNICA?m=auto&t=WxLp3kwQVHzPlDYy-1)
+El proyecto en Figma consta de 3 páginas: Colors, UI Elements & Components y Applications prototypes como se muestra en la siguiente imagen:
+![Estructura del Proyecto en Figma](./assets/screen-shots/estructura-proyecto-figma.png)
+
+### Maquetación:
+
+![Listado de Usuarios](./assets/screen-shots/home-desk.png)
+![Agregar Usuarios](./assets/screen-shots/create-user-desk.png)
+![Editar Usuarios](./assets/screen-shots/edit-user-desk.png)
+
+## Flujo de Trabajo
+
+Para este proyecto no se utilizó GitFlow, pero se siguió un flujo de trabajo similar. Se crearon las siguientes ramas:
+
+- `main`: Rama principal del proyecto.
+- `develop`: Rama de desarrollo, donde se unen las funcionalidades de las diferentes ramas de funcionalidades.
+- `feature/feature-name`: Ramas de funcionalidades, donde se desarrollan las funcionalidades del proyecto.
+
+El flujo de trabajo consistió en desarrollar características en ramas de funcionalidad individuales, probarlas y luego fusionarlas en la rama de desarrollo antes de finalmente fusionarlas en la rama principal.
+
+## Autor
+
+- GitHub - [@GalaxyPliego](https://github.com/carlos-espipliego)
+- Portfolio Web - [Portfolio](https://carlos-espipliego.github.io/portfolio-web/)
+- LinkedIn - [Carlos Espipliego](https://www.linkedin.com/in/CarlosEspiPliego/)
+- Frontend Mentor - [@GalaxyPliego](https://www.frontendmentor.io/profile/carlosespipliego)

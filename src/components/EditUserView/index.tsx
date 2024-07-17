@@ -16,7 +16,6 @@ export const EditUserView = () => {
     const showAlert = useAlert();
 
     const onSubmit = (values: User) => {
-        console.log(values)
         dispatch(updateUser({ user: values, showAlert, formik, redirectTo }))
     }
     
