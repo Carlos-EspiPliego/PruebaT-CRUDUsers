@@ -1,10 +1,12 @@
 import { IconEdit, IconEye, IconPlus, IconTrash } from '@tabler/icons-react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import './index.scss'
-import { RootState } from '../../redux'
+import { AppDispatch, RootState } from '../../redux'
 import { getInitialsName, getStatusClasses } from '@utils/userTableUtils'
 import { useRedirect } from '@hooks/useRedirect'
+import { deleteUserById } from '@store/slices/thunks'
+import { useAlert } from '../../hooks/useAlert'
 
 export const tableHeaders = [
     'ID',
@@ -16,7 +18,14 @@ export const tableHeaders = [
 
 export const UserListTable = () => {
     const { users, loading } = useSelector((state: RootState) => state.users)
+    const dispatch: AppDispatch = useDispatch();
     const redirectTo = useRedirect();
+    const showAlert = useAlert();
+
+    const handleDeleteUser = (id: number) => {
+        console.log('Delete user with id:', id)
+        dispatch(deleteUserById({ id, showAlert }))
+    }
 
     return (
         <div className="relative table__container w-full flex flex-col gap-4">
@@ -97,6 +106,7 @@ export const UserListTable = () => {
                                                 </span>
                                                 <span
                                                     className='transform transition-transform duration-300 hover:scale-110 cursor-pointer'
+                                                    onClick={() => handleDeleteUser(user.id)}
                                                 >
                                                     <IconTrash stroke={1} />
                                                 </span>

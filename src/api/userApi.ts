@@ -4,7 +4,7 @@ import { User, CreateUserDTO, UpdateUserDTO } from './types';
 // Funciones API
 // Obtener todos los usuarios
 export const getUsers = async (): Promise<User[]> => {
-    const response = await apiClient.get<User[]>(`/`);
+    const response = await apiClient.get<User[]>(`?per_page=30`);
     return response.data;
 }
 
