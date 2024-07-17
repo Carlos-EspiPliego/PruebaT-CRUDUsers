@@ -11,7 +11,7 @@ export const UserList = () => {
 
   useEffect(() => {
     dispatch(fetchUsers())
-  }, [dispatch])
+  }, [])
 
   return (
     <MainLayout titleText={"Lista de Usuarios"}>

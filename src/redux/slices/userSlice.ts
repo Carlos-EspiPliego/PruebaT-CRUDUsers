@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { UserState } from '../types';
 import { User } from '../../api/types';
-import { fetchUsers, addUser } from './thunks';
+import { fetchUsers, addUser, deleteUserById } from './thunks';
 
 const initialState: UserState = {
     users: [],
@@ -50,7 +50,20 @@ export const userSlice = createSlice({
                 state.loading = false;
                 console.log("Error Action Payload: ", action.payload)
                 state.error = action.payload;
-            })
+            });
+
+        builder.addCase(deleteUserById.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        }),
+            builder.addCase(deleteUserById.fulfilled, (state, action: PayloadAction<number>) => {
+                state.users = state.users.filter(user => user.id !== action.payload);
+                state.loading = false;
+            }),
+            builder.addCase(deleteUserById.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
     }
 })
 

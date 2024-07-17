@@ -57,3 +57,36 @@ export const addUser = createAsyncThunk<User, AddUserParams, { rejectValue: stri
         }
     }
 )
+
+// Eliminar un usuario
+interface DeleteUserParams {
+    id: number;
+    showAlert: (options: AlertOptions) => void;
+}
+
+export const deleteUserById = createAsyncThunk<number, DeleteUserParams, { rejectValue: string }>(
+    'users/deleteUser',
+    async ({ id, showAlert }, { rejectWithValue }) => {
+        try {
+            await deleteUser(id);
+            showAlert({
+                title: 'Usuario eliminado',
+                text: 'El usuario se ha eliminado correctamente',
+                icon: 'success',
+                confirmButtonText: 'OK',
+            });
+            return id;
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response) {
+                showAlert({
+                    title: 'No se pudo eliminar el usuario',
+                    text: error.response.data.message || 'Ocurrió un error inesperado. Por favor intenta más tarde.',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                });
+                return rejectWithValue(error.response.data.message || 'Failed to delete user. Please try again later.');
+            }
+            return rejectWithValue('Ocurrió un error al eliminar un usuario. Por favor intenta más tarde');
+        }
+    }
+)
