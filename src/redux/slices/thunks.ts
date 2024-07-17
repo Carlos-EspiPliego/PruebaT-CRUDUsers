@@ -1,17 +1,9 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { FormikHelpers } from 'formik';
 
-import { User, CreateUserDTO } from '@api/types';
+import { User } from '@api/types';
 import { getUsers, createUser, deleteUser } from '@api/userApi';
-import { AlertOptions } from '@hooks/useAlert';
-
-interface AddUserParams {
-    user: CreateUserDTO;
-    showAlert: (options: AlertOptions) => void;
-    formik: FormikHelpers<CreateUserDTO>;
-    redirectTo: (path: string) => void;
-}
+import { AddUserParams, DeleteUserParams, UpdateUserParams } from './types';
 
 export const fetchUsers = createAsyncThunk<User[], void, { rejectValue: string }>(
     'users/fetch',
@@ -60,11 +52,6 @@ export const addUser = createAsyncThunk<User, AddUserParams, { rejectValue: stri
 )
 
 // Eliminar un usuario
-interface DeleteUserParams {
-    id: number;
-    showAlert: (options: AlertOptions) => void;
-}
-
 export const deleteUserById = createAsyncThunk<number, DeleteUserParams, { rejectValue: string }>(
     'users/deleteUser',
     async ({ id, showAlert }, { rejectWithValue }) => {
@@ -88,6 +75,44 @@ export const deleteUserById = createAsyncThunk<number, DeleteUserParams, { rejec
                 return rejectWithValue(error.response.data.message || 'Failed to delete user. Please try again later.');
             }
             return rejectWithValue('Ocurrió un error al eliminar un usuario. Por favor intenta más tarde');
+        }
+    }
+)
+
+// Actualizar un usuario
+export const updateUser = createAsyncThunk<User, UpdateUserParams, { rejectValue: string }>(
+    'users/updateUser',
+    async ({ user, showAlert, formik, redirectTo }, { rejectWithValue }) => {
+        try {
+            const response: User = await createUser(user);
+            console.log("updateUser Response: ", response);
+            if (response) {
+                showAlert({
+                    title: 'Usuario actualizado',
+                    text: 'El usuario se ha actualizado correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    callback: () => {
+                        formik.resetForm();
+                        redirectTo('/');
+                    }
+                });
+            }
+            return response;
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response) {
+                showAlert({
+                    title: 'No se pudo actualizar el usuario',
+                    text: error.response.data.message || 'Ocurrió un error inesperado. Por favor intenta más tarde.',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                    callback: () => {
+                        formik.resetForm();
+                    }
+                });
+                return rejectWithValue(error.response.data.message || 'Failed to update user. Please try again later.');
+            }
+            return rejectWithValue('Ocurrió un error al actualizar un usuario. Por favor intenta más tarde');
         }
     }
 )

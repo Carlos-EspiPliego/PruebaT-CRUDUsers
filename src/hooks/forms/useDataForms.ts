@@ -1,14 +1,30 @@
 import * as Yup from 'yup';
-import { CreateUserDTO, Gender, Status } from '@api/types';
+import { Gender, Status, User } from '@api/types';
+import { useSelector } from 'react-redux';
+import { RootState } from '@store/store';
 
 export const useDataForms = () => {
+    const { activeUser } = useSelector((state: RootState) => state.users);
 
-    const initialValues: CreateUserDTO = {
+    let initialValues: User = {
+        id: '',
         name: '',
         email: '',
         gender: Gender.Default,
         status: Status.Active,
     }
+
+    if (activeUser) {
+        initialValues = {
+            id: activeUser.id,
+            name: activeUser.name,
+            email: activeUser.email,
+            gender: activeUser.gender,
+            status: activeUser.status,
+        }
+    }
+
+    // console.log('Initial Values: ', initialValues)
 
     const validationSchema = {
         name: Yup.string().required('El nombre es requerido')

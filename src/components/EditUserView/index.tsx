@@ -1,16 +1,15 @@
-import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux"
 
-import { User } from '@api/types';
-import { useDataForms } from "@hooks/forms/useDataForms";
-import { addUser } from "@store/slices/thunks";
+import { User } from "@api/types"
+import { UserForm } from "@components/UserForm"
+import { updateUser } from "@store/slices/thunks"
 import { AppDispatch } from "@store/store";
 import { useAlert } from "@hooks/useAlert";
 import { useRedirect } from "@hooks/useRedirect";
-import { useFormikForm } from "@hooks/forms/useFormikForm"
-import { UserForm } from "@components/UserForm";
+import { useDataForms } from "@hooks/forms/useDataForms";
+import { useFormikForm } from "@hooks/forms/useFormikForm";
 
-
-export const CreateNewUserForm = () => {
+export const EditUserView = () => {
     const { initialValues, validationSchema } = useDataForms()
     const dispatch: AppDispatch = useDispatch();
     const redirectTo = useRedirect();
@@ -18,9 +17,9 @@ export const CreateNewUserForm = () => {
 
     const onSubmit = (values: User) => {
         console.log(values)
-        dispatch(addUser({ user: values, showAlert, formik, redirectTo }))
+        dispatch(updateUser({ user: values, showAlert, formik, redirectTo }))
     }
-
+    
     const formik = useFormikForm<User>({
         initialValues,
         validationSchema,
@@ -29,7 +28,7 @@ export const CreateNewUserForm = () => {
 
     return (
         <UserForm
-            btnText="Crear"
+            btnText="Editar"
             formik={formik}
         />
     )
