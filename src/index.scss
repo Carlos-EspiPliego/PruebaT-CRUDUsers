@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilizando la barra de desplazamiento */
+::-webkit-scrollbar {
+    width: 4px; /* Ancho de la barra de desplazamiento */
+    height: 4px; /* Altura para desplazamiento horizontal */
+}
+
+/* Estilizando el pulgar (la parte que se mueve) */
+::-webkit-scrollbar-thumb {
+    background-color: #868383; /* Color del pulgar */
+    border-radius: 12px; /* Bordes redondeados */
+}
+
+/* Estilizando la pista de desplazamiento */
+::-webkit-scrollbar-track {
+    background: #F2F2F2; /* Color de fondo de la pista */
+}

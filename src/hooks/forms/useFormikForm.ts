@@ -1,16 +1,18 @@
 import { FormikValues, useFormik } from "formik";
 import * as Yup from "yup";
-import { FormikFormConfig } from './types'
+import { FormikFormProps } from './types'
 
-export const useFormikForm = <T extends FormikValues> ( config: FormikFormConfig<T> ) => {
-    
-    const { initialValues, validationSchema, onSubmit } = config;
+export const useFormikForm = <Values extends FormikValues> ({
+    initialValues,
+    validationSchema,
+    onSubmit
+}: FormikFormProps<Values>) => {
 
-    const formik = useFormik<T>({
+    const formik = useFormik({
         initialValues: initialValues,
         validationSchema: Yup.object().shape(validationSchema),
         onSubmit: onSubmit,
     });
 
-    return formik;
+    return formik ;
 }

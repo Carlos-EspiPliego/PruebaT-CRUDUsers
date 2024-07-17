@@ -1,11 +1,94 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { UserState } from '../types';
+import { User } from '@api/types';
+import { fetchUsers, addUser, deleteUserById, updateUser } from './thunks';
 
-const initialState = {
-
+const initialState: UserState = {
+    users: [],
+    activeUser: null,
+    loading: false,
+    error: null
 }
 
 export const userSlice = createSlice({
     name: 'users',
     initialState,
-    reducers: {}
+    reducers: {
+        setUsers(state, action: PayloadAction<User[]>) {
+            state.users = action.payload;
+        },
+        setLoading(state, action: PayloadAction<boolean>) {
+            state.loading = action.payload;
+        },
+        setError(state, action: PayloadAction<string | null>) {
+            state.error = action.payload;
+        },
+        setActiveUser(state, action: PayloadAction<User>) {
+            console.log('Active User:', action.payload)
+            state.activeUser = action.payload;
+        },
+        resetActiveUser(state) {
+            state.activeUser = null;
+        }
+    },
+
+    extraReducers: (builder) => {
+        builder.addCase(fetchUsers.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        }),
+            builder.addCase(fetchUsers.fulfilled, (state, action) => {
+                state.users = action.payload;
+                state.loading = false;
+            }),
+            builder.addCase(fetchUsers.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
+
+        builder.addCase(addUser.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        }),
+            builder.addCase(addUser.fulfilled, (state, action) => {
+                state.users.push(action.payload);
+                resetActiveUser();
+                state.loading = false;
+            }),
+            builder.addCase(addUser.rejected, (state, action) => {
+                state.loading = false;
+                console.log("Error Action Payload: ", action.payload)
+                state.error = action.payload;
+            });
+
+        builder.addCase(deleteUserById.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        }),
+            builder.addCase(deleteUserById.fulfilled, (state, action: PayloadAction<number>) => {
+                state.users = state.users.filter(user => user.id !== action.payload);
+                state.loading = false;
+            }),
+            builder.addCase(deleteUserById.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
+        
+        builder.addCase(updateUser.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        }),
+            builder.addCase(updateUser.fulfilled, (state, action) => {
+                const updatedUser = action.payload;
+                state.users = state.users.map(user => user.id === updatedUser.id ? updatedUser : user);
+                resetActiveUser();
+                state.loading = false;
+            }),
+            builder.addCase(updateUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
+    }
 })
+
+export const { setUsers, setError, setLoading, setActiveUser, resetActiveUser } = userSlice.actions
