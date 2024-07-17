@@ -10,6 +10,8 @@ export default {
         background: '#151823',
         container: '#1E212F',
         line: '#2C2F3F',
+        input: '#2F3349',
+        inputstroke: '#434968',
         // Colores para el texto
         text: {
           body: '#A599AD',

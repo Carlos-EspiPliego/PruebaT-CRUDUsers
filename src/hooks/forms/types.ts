@@ -1,6 +1,8 @@
 import { FormikConfig } from 'formik';
-import { ObjectShape } from 'yup';
+import * as Yup from 'yup';
 
-export interface FormikFormConfig<T> extends Omit<FormikConfig<T>, 'validationSchema'> {
-    validationSchema: ObjectShape;
+export interface FormikFormProps<Values> {
+    initialValues: Values;
+    validationSchema: Values;
+    onSubmit: FormikConfig<Values>['onSubmit'];
 }
