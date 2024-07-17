@@ -5,6 +5,7 @@ import { fetchUsers, addUser, deleteUserById } from './thunks';
 
 const initialState: UserState = {
     users: [],
+    activeUser: null,
     loading: false,
     error: null
 }
@@ -22,6 +23,10 @@ export const userSlice = createSlice({
         setError(state, action: PayloadAction<string | null>) {
             state.error = action.payload;
         },
+        setActiveUser(state, action: PayloadAction<User>) {
+            console.log('Active User:', action.payload)
+            state.activeUser = action.payload;
+        }
     },
 
     extraReducers: (builder) => {
@@ -67,4 +72,4 @@ export const userSlice = createSlice({
     }
 })
 
-export const { setUsers, setError, setLoading } = userSlice.actions
+export const { setUsers, setError, setLoading, setActiveUser } = userSlice.actions
