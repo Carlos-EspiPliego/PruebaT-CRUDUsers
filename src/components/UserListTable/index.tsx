@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import './index.scss'
 import { RootState } from '../../redux'
 import { getInitialsName, getStatusClasses } from '@utils/userTableUtils'
+import { useRedirect } from '@hooks/useRedirect'
 
 export const tableHeaders = [
     'ID',
@@ -15,6 +16,7 @@ export const tableHeaders = [
 
 export const UserListTable = () => {
     const { users, loading } = useSelector((state: RootState) => state.users)
+    const redirectTo = useRedirect();
 
     return (
         <div className="relative table__container w-full flex flex-col gap-4">
@@ -26,7 +28,7 @@ export const UserListTable = () => {
                 </div>
                 {/* Botón para agregar un nuevo usuario */}
                 <div>
-                    <button className='flex items-center gap-2 bg-primary-500 p-2 px-4 rounded-lg text-text-title hover:bg-primary-600 transform transition-transform duration-300 hover:scale-105'>
+                    <button onClick={() => redirectTo('/crear-usuario')} className='flex items-center gap-2 bg-primary-500 p-2 px-4 rounded-lg text-text-title hover:bg-primary-600 transform transition-transform duration-300 hover:scale-105'>
                         Añadir
                         <IconPlus stroke={1} />
                     </button>
@@ -52,52 +54,60 @@ export const UserListTable = () => {
                                     </td>
                                 </tr>
                             ) : (
-                                users.map(user => (
-                                    <tr key={user.id}>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">{user.id}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm">
-                                            <div className='flex gap-4'>
-                                                {/* Circulo de perfil con la inicial de su nombre */}
-                                                <div className=''>
-                                                    <div className='w-10 h-10 bg-primary-500/30 rounded-full flex items-center justify-center'>
-                                                        <p className='text-primary-300 font-semibold'>{getInitialsName(user.name)}</p>
-                                                    </div>
-                                                </div>
-                                                {/* Sección del nombre y el email */}
-                                                <div className='flex flex-col'>
-                                                    <p className='font-semibold text-text-title'>{user.name}</p>
-                                                    <p className='text-text-body'>{user.email}</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm">
-                                            {(user.gender.toLowerCase()) === 'female' ? 'Femenino' : 'Masculino'}
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm">
-                                            <span className={getStatusClasses(user.status)}>
-                                                {(user.status.toLowerCase()) === 'inactive' ? 'Inactivo' : 'Activo'}
-                                            </span>
-                                        </td>
-                                        {/* Sección de las acciones con los iconos de eliminar, editar y ver */}
-                                        <td className='px-6 py-4 flex gap-4 items-center justify-center'>
-                                            <span
-                                                className='transform transition-transform duration-300 hover:scale-110 cursor-pointer'
-                                            >
-                                                <IconEdit stroke={1} />
-                                            </span>
-                                            <span
-                                                className='transform transition-transform duration-300 hover:scale-110 cursor-pointer'
-                                            >
-                                                <IconTrash stroke={1} />
-                                            </span>
-                                            <span
-                                                className='transform transition-transform duration-300 hover:scale-110 cursor-pointer'
-                                            >
-                                                <IconEye stroke={1} />
-                                            </span>
+                                // Validación cuando no hay usuarios
+                                users.length === 0 ? (
+                                    <tr>
+                                        <td colSpan={tableHeaders.length} className="text-center py-4">
+                                            Ocurrió un error al cargar los datos
                                         </td>
                                     </tr>
-                                ))
+                                ) :
+                                    users.map(user => (
+                                        <tr key={user.id}>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">{user.id}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm">
+                                                <div className='flex gap-4'>
+                                                    {/* Circulo de perfil con la inicial de su nombre */}
+                                                    <div className=''>
+                                                        <div className='w-10 h-10 bg-primary-500/30 rounded-full flex items-center justify-center'>
+                                                            <p className='text-primary-300 font-semibold'>{getInitialsName(user.name)}</p>
+                                                        </div>
+                                                    </div>
+                                                    {/* Sección del nombre y el email */}
+                                                    <div className='flex flex-col'>
+                                                        <p className='font-semibold text-text-title'>{user.name}</p>
+                                                        <p className='text-text-body'>{user.email}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm">
+                                                {(user.gender.toLowerCase()) === 'female' ? 'Femenino' : 'Masculino'}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm">
+                                                <span className={getStatusClasses(user.status)}>
+                                                    {(user.status.toLowerCase()) === 'inactive' ? 'Inactivo' : 'Activo'}
+                                                </span>
+                                            </td>
+                                            {/* Sección de las acciones con los iconos de eliminar, editar y ver */}
+                                            <td className='px-6 py-4 flex gap-4 items-center justify-center'>
+                                                <span
+                                                    className='transform transition-transform duration-300 hover:scale-110 cursor-pointer'
+                                                >
+                                                    <IconEdit stroke={1} />
+                                                </span>
+                                                <span
+                                                    className='transform transition-transform duration-300 hover:scale-110 cursor-pointer'
+                                                >
+                                                    <IconTrash stroke={1} />
+                                                </span>
+                                                <span
+                                                    className='transform transition-transform duration-300 hover:scale-110 cursor-pointer'
+                                                >
+                                                    <IconEye stroke={1} />
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))
                             )
                         }
                     </tbody>

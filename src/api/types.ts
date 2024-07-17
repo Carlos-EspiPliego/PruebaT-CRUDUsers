@@ -1,5 +1,6 @@
 // Enumeradores
 export enum Gender {
+    Default = '',
     Male = 'male',
     Female = 'female'
 }

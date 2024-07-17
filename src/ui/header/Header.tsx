@@ -1,17 +1,12 @@
-import { useNavigate } from 'react-router-dom'
-
 import LogoUsers from '@images/users-logo.png'
+import { useRedirect } from '@hooks/useRedirect'
 
 export const Header = () => {
-    const navigate = useNavigate()
-
-    const redirectTo = () => {
-        navigate('/')
-    }
+    const redirectTo = useRedirect();
 
     return (
         <header className='bg-container h-16 text-text-body flex justify-center items-center'>
-            <figure className='h-16 flex items-center cursor-pointer' onClick={() => redirectTo()}>
+            <figure className='h-16 flex items-center cursor-pointer' onClick={() => redirectTo('/prueba')}>
                 <picture>
                     <source srcSet={LogoUsers} type='image/webp' />
                     <img

@@ -1,9 +1,9 @@
 // función para obtener la primera letra del nombre y aprellido
 export const getInitialsName = (name: string): string => {
     const words: string[] = name.trim().split(' ');
-    
-    const firstNameInitial = words[0][0].toUpperCase();
-    const lastNameInitial = words[1][0].toUpperCase();
+
+    const firstNameInitial = words[0] ? words[0][0].toUpperCase() : '';
+    const lastNameInitial = words[1] ? words[1][0].toUpperCase() : '';
 
     return firstNameInitial + lastNameInitial;
 }

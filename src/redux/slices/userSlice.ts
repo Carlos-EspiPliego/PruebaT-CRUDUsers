@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { UserState } from '../types';
 import { User } from '../../api/types';
-import { fetchUsers } from './thunks';
+import { fetchUsers, addUser } from './thunks';
 
 const initialState: UserState = {
     users: [],
@@ -23,20 +23,34 @@ export const userSlice = createSlice({
             state.error = action.payload;
         },
     },
-    
+
     extraReducers: (builder) => {
         builder.addCase(fetchUsers.pending, (state) => {
             state.loading = true;
             state.error = null;
         }),
-        builder.addCase(fetchUsers.fulfilled, (state, action) => {
-            state.users = action.payload;
-            state.loading = false;
+            builder.addCase(fetchUsers.fulfilled, (state, action) => {
+                state.users = action.payload;
+                state.loading = false;
+            }),
+            builder.addCase(fetchUsers.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
+
+        builder.addCase(addUser.pending, (state) => {
+            state.loading = true;
+            state.error = null;
         }),
-        builder.addCase(fetchUsers.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.payload;
-        })
+            builder.addCase(addUser.fulfilled, (state, action) => {
+                state.users.push(action.payload);
+                state.loading = false;
+            }),
+            builder.addCase(addUser.rejected, (state, action) => {
+                state.loading = false;
+                console.log("Error Action Payload: ", action.payload)
+                state.error = action.payload;
+            })
     }
 })
 
