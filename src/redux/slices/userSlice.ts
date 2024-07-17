@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { UserState } from '../types';
 import { User } from '@api/types';
-import { fetchUsers, addUser, deleteUserById } from './thunks';
+import { fetchUsers, addUser, deleteUserById, updateUser } from './thunks';
 
 const initialState: UserState = {
     users: [],
@@ -26,6 +26,9 @@ export const userSlice = createSlice({
         setActiveUser(state, action: PayloadAction<User>) {
             console.log('Active User:', action.payload)
             state.activeUser = action.payload;
+        },
+        resetActiveUser(state) {
+            state.activeUser = null;
         }
     },
 
@@ -49,6 +52,7 @@ export const userSlice = createSlice({
         }),
             builder.addCase(addUser.fulfilled, (state, action) => {
                 state.users.push(action.payload);
+                resetActiveUser();
                 state.loading = false;
             }),
             builder.addCase(addUser.rejected, (state, action) => {
@@ -69,7 +73,22 @@ export const userSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             });
+        
+        builder.addCase(updateUser.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        }),
+            builder.addCase(updateUser.fulfilled, (state, action) => {
+                const updatedUser = action.payload;
+                state.users = state.users.map(user => user.id === updatedUser.id ? updatedUser : user);
+                resetActiveUser();
+                state.loading = false;
+            }),
+            builder.addCase(updateUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
     }
 })
 
-export const { setUsers, setError, setLoading, setActiveUser } = userSlice.actions
+export const { setUsers, setError, setLoading, setActiveUser, resetActiveUser } = userSlice.actions

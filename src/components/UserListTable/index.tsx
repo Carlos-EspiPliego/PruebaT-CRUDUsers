@@ -24,14 +24,22 @@ export const UserListTable = () => {
     const redirectTo = useRedirect();
     const showAlert = useAlert();
 
-    const handleDeleteUser = (id: number) => {
+    const handleDeleteUser = (id: number | null | '') => {
         console.log('Delete user with id:', id)
-        dispatch(deleteUserById({ id, showAlert }))
+        if (typeof id === 'number') {
+            console.log('Delete user with id:', id);
+            dispatch(deleteUserById({ id, showAlert }));
+        }
     }
 
     const handleViewUser = (user: User) => {
         dispatch(setActiveUser(user))
         redirectTo(`/ver-usuario/${user.id}`)
+    }
+
+    const handleEditUser = (user: User) => {
+        dispatch(setActiveUser(user))
+        redirectTo(`/editar-usuario/${user.id}`)
     }
 
     return (
@@ -108,6 +116,7 @@ export const UserListTable = () => {
                                             <td className='px-6 py-4 flex gap-4 items-center justify-center'>
                                                 <span
                                                     className='transform transition-transform duration-300 hover:scale-110 cursor-pointer'
+                                                    onClick={() => handleEditUser(user)}
                                                 >
                                                     <IconEdit stroke={1} />
                                                 </span>
